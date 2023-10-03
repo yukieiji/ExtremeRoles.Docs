@@ -25,6 +25,10 @@ search:
 
   button: true
 
+nav_external_links:
+  - title: 新しいチケットを作成する
+    url: https://github.com/yukieiji/ExtremeRoles/issues/new/choose
+
 aux_links_new_tab: true
 
 aux_links:
