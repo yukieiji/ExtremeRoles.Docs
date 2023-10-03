@@ -5,19 +5,33 @@ theme: just-the-docs
 url: https://yukieiji.github.io/ExtremeRoles.Doc
 
 search_enabled: true
-# Maximum amount of previews per search result
-# Default: 3
-search.previews: 3
 
-# Maximum amount of words to display before a matched word in the preview
-# Default: 5
-search.preview_words_before: 5
+search:
 
-# Maximum amount of words to display after a matched word in the preview
-# Default: 10
-search.preview_words_after: 10
+  # Maximum amount of previews per search result
+  # Default: 3
+  previews: 3
 
-search.button: true
+  # Maximum amount of words to display before a matched word in the preview
+  # Default: 5
+  preview_words_before: 5
+
+  # Maximum amount of words to display after a matched word in the preview
+  # Default: 10
+  
+  preview_words_after: 10
+
+  tokenizer_separator: /[\s/]+/
+
+  button: true
+
+aux_links_new_tab: true
 
 aux_links:
   ExtremeRoles リポジトリ: https://github.com/yukieiji/ExtremeRoles
+
+
+back_to_top: true
+back_to_top_text: "ページトップに戻る"
+
+footer_content: "<p xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:dct=\"http://purl.org/dc/terms/\"><a property=\"dct:title\" rel=\"cc:attributionURL\" href=\"https://github.com/yukieiji/ExtremeRoles.Docs\">ExtremeRoles.Doc</a>は<a href=\"http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1\" target=\"_blank\" rel=\"license noopener noreferrer\">CC BY 4.0<img style=\"height:22px!important;margin-left:3px;vertical-align:text-bottom;\" src=\"https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1\"><img style=\"height:22px!important;margin-left:3px;vertical-align:text-bottom;\" src=\"https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1\"></a>の下に提供されています</p>"
