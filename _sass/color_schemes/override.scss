@@ -1,0 +1,19 @@
+// Import existing variables to override them
+@import "./support/variables";
+
+// Define the Google Font URL and font-family
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200;500;700&display=swap");
+
+// フォントをグーグルフォントを使うように変更
+$body-font-family: "Noto Sans JP", system-ui, -apple-system, blinkmacsystemfont, "Segoe UI",
+roboto, "Helvetica Neue", arial, sans-serif, "Segoe UI Emoji";
+$mono-font-family: "Noto Sans JP", "SFMono-Regular", menlo, consolas, monospace;
+
+// 横幅を全体的に拡張
+$nav-width: 20.5rem;
+$nav-width-md: 19.5rem;
+$content-width: 58rem;
+
+// タブの高さを少し大きくする
+$nav-list-item-height: $sp-7;
+$nav-list-item-height-sm: $sp-9;
