@@ -1,5 +1,7 @@
 ---
 title: トップページ
+description: ExtremeRoles Wikiのトップページ
+lang: ja_JP
 layout: home
 nav_order: 1
 ---

@@ -1,6 +1,8 @@
 ---
 layout: default
 title: ExtremeVoiceEngine
+description: ExtremeRolesの読み上げアドオンExtreme Voice Engineについて
+lang: ja_JP
 nav_order: 8
 has_children: true
 ---
