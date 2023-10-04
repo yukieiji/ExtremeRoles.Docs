@@ -8,6 +8,7 @@ gem "just-the-docs", "0.6.2" # pinned to the current release
 
 gem "jekyll-github-metadata", ">= 2.15"
 
+gem "jekyll-sitemap", group: :jekyll_plugins
 gem "jekyll-include-cache", group: :jekyll_plugins
 
 gem "html-proofer", "~> 5.0", :group => :development

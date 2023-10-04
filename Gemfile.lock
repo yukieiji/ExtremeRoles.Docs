@@ -72,6 +72,8 @@ GEM
       sass-embedded (~> 1.54)
     jekyll-seo-tag (2.8.0)
       jekyll (>= 3.8, < 5.0)
+    jekyll-sitemap (1.4.0)
+      jekyll (>= 3.7, < 5.0)
     jekyll-watch (2.2.1)
       listen (~> 3.0)
     just-the-docs (0.6.2)
@@ -142,6 +144,7 @@ DEPENDENCIES
   jekyll (~> 4.3.2)
   jekyll-github-metadata (>= 2.15)
   jekyll-include-cache
+  jekyll-sitemap
   just-the-docs (= 0.6.2)
 
 BUNDLED WITH
