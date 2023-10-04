@@ -56,5 +56,22 @@ plugins:
   - jekyll-github-metadata
   - jekyll-include-cache
 
+callouts_level: quiet # or loud
+callouts:
+  highlight:
+    color: yellow
+  important:
+    title: Important
+    color: blue
+  new:
+    title: New❗
+    color: green
+  note:
+    title: ノート📒
+    color: purple
+  warning:
+    title: 注意⚠️
+    color: red
+
 
 color_scheme: override
