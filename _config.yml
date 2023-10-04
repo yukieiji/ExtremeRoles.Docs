@@ -75,4 +75,7 @@ callouts:
     color: red
 
 
+ga_tracking: 6249712762,G-6KPKYR5R8E
+ga_tracking_anonymize_ip: true
+
 color_scheme: override
