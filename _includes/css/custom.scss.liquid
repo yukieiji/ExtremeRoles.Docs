@@ -1,0 +1,21 @@
+@import "./custom/custom";
+
+{%- for callout in site.callouts %}
+
+p.{{ callout[0] }}, blockquote.{{ callout[0] }} {
+    background: rgba(${{ callout[1].color }}-{{ callout_background_hue }}, {{ callout_opacity }});
+    border-left: $border-radius solid ${{ callout[1].color }}-{{ callout_color_hue }};
+    border-radius: $border-radius;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 3px 10px rgba(0, 0, 0, 0.08);
+    padding: .8rem;
+    {% if callout[1].title %}
+    &::before {
+        font-size: 1.05rem;
+    }
+    {% endif %}
+    > .{{ callout[0] }}-title {
+      font-size: 1.05rem;
+    }
+}
+
+{% endfor -%}
