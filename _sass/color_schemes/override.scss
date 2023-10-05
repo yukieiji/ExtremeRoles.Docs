@@ -17,3 +17,11 @@ $content-width: 58rem;
 // タブの高さを少し大きくする
 $nav-list-item-height: $sp-7;
 $nav-list-item-height-sm: $sp-9;
+
+blockquote {
+    &.note, &.warning, &.important {
+        &::before {
+            font-size: 1.05rem !important;
+        }
+    }
+}
