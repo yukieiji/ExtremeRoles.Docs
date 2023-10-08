@@ -1,0 +1,23 @@
+// ネストされたリストのカウンター設定を変更
+.main-content {
+    ol {
+        > li {
+            ol {
+                > li {
+                    &::before {
+                        content: counter(sub-counter);
+                    }
+                    ol {
+                        counter-reset: sub-sub-counter;
+                        > li {
+                            &::before {
+                                content: counter(sub-sub-counter);
+                                counter-increment: sub-sub-counter;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
