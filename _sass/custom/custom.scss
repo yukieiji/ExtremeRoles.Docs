@@ -5,13 +5,13 @@
             ol {
                 > li {
                     &::before {
-                        content: counter(sub-counter);
+                        content: counter(sub-counter, upper-alpha);
                     }
                     ol {
                         counter-reset: sub-sub-counter;
                         > li {
                             &::before {
-                                content: counter(sub-sub-counter);
+                                content: counter(sub-sub-counter, lower-alpha);
                                 counter-increment: sub-sub-counter;
                             }
                         }
