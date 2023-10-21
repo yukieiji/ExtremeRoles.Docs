@@ -1,0 +1,22 @@
+{
+  "name": "exr-docs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev -p 1000",
+    "build": "next build",
+    "start": "next start"
+  },
+  "keywords": [],
+  "author": "Hideko, yukieiji",
+  "license": "CC4-BY",
+  "dependencies": {
+    "next": "13.1.2",
+    "next-seo": "^6.1.0",
+    "nextra": "^2.13.2",
+    "nextra-theme-docs": "^2.13.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
