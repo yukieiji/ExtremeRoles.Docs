@@ -13,18 +13,24 @@
 }
 .warning {
     border-left: 2px solid #f77e7e;
-    color: #f77e7e;
     background: rgba(247, 126, 126, 0.15);
 }
 .important {
     border-left: 2px solid #2c84fa;
-    color: #2c84fa;
     background: rgba(44, 132, 250, 0.15);
 }
 .note {
     border-left: 2px solid #7253ed;
-    color: #7253ed;
     background: rgba(114, 83, 237, 0.15);
+}
+.warningtitle {
+    color: #f77e7e;
+}
+.importanttitle {
+    color: #2c84fa;
+}
+.notetitle {
+    color: #7253ed;
 }
 .texts {
     padding-block: 0.3rem;
