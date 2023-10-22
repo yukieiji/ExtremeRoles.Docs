@@ -12,6 +12,9 @@
   "author": "Hideko, yukieiji",
   "license": "CC4-BY",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "next": "13.1.2",
     "next-seo": "^6.1.0",
     "nextra": "^2.13.2",
