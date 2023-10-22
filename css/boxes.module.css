@@ -1,7 +1,8 @@
 .box {
     border-radius: 4px;
     padding: 0.5rem;
-    max-width: 100%;
+    width: max-content;
+    min-width: 5.5rem;
     margin-block: 5px;
 }
 .title {
