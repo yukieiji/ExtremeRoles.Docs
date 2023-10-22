@@ -5,10 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c03132b4-35cb-4b01-8a4a-75b03110a5a5" name="変更" comment="">
+      <change afterPath="$PROJECT_DIR$/components/logo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/boxes.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/boxes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/boxes.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/boxes.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/index.en-US.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.en-US.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.ja-JP.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.ja-JP.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/theme.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/theme.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +20,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -84,7 +86,7 @@
       <updated>1697968159949</updated>
       <workItem from="1697968161261" duration="5209000" />
       <workItem from="1697975817988" duration="2067000" />
-      <workItem from="1697977967949" duration="1931000" />
+      <workItem from="1697977967949" duration="3753000" />
     </task>
     <servers />
   </component>
