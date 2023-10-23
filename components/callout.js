@@ -1,9 +1,9 @@
-import s from "/css/boxes.module.css";
+import s from "/css/callout.module.css";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleExclamation, faNoteSticky, faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
 import {useRouter} from "next/router";
 export default function CustomCallout({ children, type, titleSize=16 }) {
-    const { locale, defaultLocale } = useRouter()
+    const { locale } = useRouter()
     let cn;
     let warning;
     let important;
