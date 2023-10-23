@@ -1,9 +1,12 @@
+import Logo from "/components/logo";
+
 export default {
     useNextSeoProps() {
         return {
             titleTemplate: '%s - ExtremeRoles'
         }
     },
+    logo: <Logo/>,
     project: {
         link: 'https://github.com/yukieiji/ExtremeRoles',
     },
@@ -17,5 +20,8 @@ export default {
     i18n: [
         { locale: 'ja-JP', text: '日本語' },
         { locale: 'en-US', text: 'English' },
-    ]
+    ],
+    search: {
+        placeholder: "Search documentation..."
+    }
 }
