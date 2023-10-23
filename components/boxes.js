@@ -33,7 +33,7 @@ export default function Boxes({ children, type }) {
                     {type === "note" && <div className={`${s.title} ${s.notetitle}`}> <FontAwesomeIcon icon={faNoteSticky} width={16}/> <p>{note}</p> </div>}
                 </div>
                 <div className={s.texts}>
-                    <p>{children}</p>
+                    <div>{children}</div>
                 </div>
             </div>
         </>
