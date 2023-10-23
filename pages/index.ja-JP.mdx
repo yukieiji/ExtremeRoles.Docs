@@ -1,14 +1,15 @@
-import Boxes from "/components/boxes";
+import Callout from "/components/callout";
 import { Cards, Card, Steps } from 'nextra/components'
 
-#### titleSize=16 がデフォルトです。
-
-<Boxes type="warning" titleSize={16}>Hello World from Hideko. これはwarningタイプだよ。</Boxes>
-<Boxes type="important" titleSize={25}>Hello World!!!!</Boxes>
-<Boxes type="note" titleSize={40}>
-    - aa
-    - Hello yukieiji
-</Boxes>
+<Callout type="warning">Hello World from Hideko. これはwarningタイプだよ。<br/>br使えるんだ<br/>初めて知りましたよ</Callout>
+<Callout type="important">Hello World!!!!</Callout>
+<Callout type="note">
+    #### これコピーしてね
+    ```js copy showLineNumbers filename="hideko.jsx"
+    console.log("すげーこれで使えるんだ");
+    ```
+    ### 上の空白はnextraのせい
+</Callout>
 
 
 <Cards>
