@@ -5,10 +5,10 @@ import {faCircleExclamation, faNoteSticky, faTriangleExclamation} from "@fortawe
 
 export default function CustomCallout({ children, type, titleSize=16 }) {
 
-    const className = GetCalloutClassName(type)
-    const titleClassName = GetCalloutTitleClassName(type)
-    const icon = GetIcon(type)
-    const title = GetTitele(type)
+    const className = getClassName(type)
+    const titleClassName = getTitleClassName(type)
+    const icon = getIcon(type)
+    const title = getTitle(type)
 
     return (
         <>
@@ -29,19 +29,19 @@ export default function CustomCallout({ children, type, titleSize=16 }) {
     );
 }
 
-function GetCalloutClassName(type)
+function getClassName(type)
 {
     const className = s[type] || '';
     return `${className} ${s.box}`;
 }
 
-function GetCalloutTitleClassName(type)
+function getTitleClassName(type)
 {
     const className = s[type + 'title'] || '';
     return `${s.title} ${className}`.trim();
 }
 
-function GetTitele(type)
+function getTitle(type)
 {
     switch(type)
     {
@@ -56,7 +56,7 @@ function GetTitele(type)
     }
 }
 
-function GetIcon(type)
+function getIcon(type)
 {
     switch(type)
     {
