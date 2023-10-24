@@ -1,7 +1,7 @@
-import s from "/css/callout.module.css";
-import {Warning, Important, Note } from "/components/translation";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCircleExclamation, faNoteSticky, faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
+import s from '/css/callout.module.css';
+import {Warning, Important, Note } from '/components/translation';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faCircleExclamation, faNoteSticky, faTriangleExclamation} from '@fortawesome/free-solid-svg-icons';
 
 export default function CustomCallout({ children, type, titleSize=16 }) {
 
@@ -45,14 +45,14 @@ function getTitle(type)
 {
     switch(type)
     {
-        case "warning":
+        case 'warning':
             return Warning();
-        case "important":
+        case 'important':
             return Important();
-        case "note":
+        case 'note':
             return Note();
         default:
-            return ``;
+            return '';
     }
 }
 
@@ -60,13 +60,13 @@ function getIcon(type)
 {
     switch(type)
     {
-        case "warning":
+        case 'warning':
             return faTriangleExclamation;
-        case "important":
+        case 'important':
             return faCircleExclamation;
-        case "note":
+        case 'note':
             return faNoteSticky;
         default:
-            return ``;
+            return '';
     }
 }
