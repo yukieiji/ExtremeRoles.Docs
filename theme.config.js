@@ -1,4 +1,5 @@
 import Logo from "/components/logo";
+import { Footer } from "./components/translation";
 
 export default {
     useNextSeoProps() {
@@ -15,7 +16,7 @@ export default {
     },
     docsRepositoryBase: 'https://github.com/yukieiji/ExtremeRoles',
     footer: {
-        text: 'ExtremeRoles は、CC by 4.0 の下に提供されています',
+        text: () => { return Footer() },
     },
     i18n: [
         { locale: 'ja-JP', text: '日本語' },
