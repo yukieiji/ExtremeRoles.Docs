@@ -1,4 +1,4 @@
-import {useRouter} from "next/router";
+import {useRouter} from 'next/router';
 
 export function Warning()
 {
@@ -7,12 +7,12 @@ export function Warning()
 
     switch(locale)
     {
-        case "ja-JP":
-            return "注意"
-        case "en-US":
-            return "Warning"
+        case 'ja-JP':
+            return '注意'
+        case 'en-US':
+            return 'Warning'
         default:
-            return ``;
+            return '';
     }
 }
 
@@ -23,12 +23,12 @@ export function Important()
 
     switch(locale)
     {
-        case "ja-JP":
-            return "重要"
-        case "en-US":
-            return "Important"
+        case 'ja-JP':
+            return '重要'
+        case 'en-US':
+            return 'Important'
         default:
-            return ``;
+            return '';
     }
 }
 
@@ -39,12 +39,12 @@ export function Note()
 
     switch(locale)
     {
-        case "ja-JP":
-            return "ノート"
-        case "en-US":
-            return "Note"
+        case 'ja-JP':
+            return 'ノート'
+        case 'en-US':
+            return 'Note'
         default:
-            return ``;
+            return '';
     }
 }
 
@@ -55,11 +55,72 @@ export function Footer()
 
     switch(locale)
     {
-        case "ja-JP":
-            return "ExtremeRoles.Doc © 2023 by yukieiji, HidekoはCC BY 4.0によってライセンスされています";
-        case "en-US":
-            return "ExtremeRoles.Doc © 2023 by yukieiji, Hideko is licensed under CC BY 4.0";
+        case 'ja-JP':
+            return 'ExtremeRoles.Doc © 2023 by yukieiji, HidekoはCC BY 4.0によってライセンスされています';
+        case 'en-US':
+            return 'ExtremeRoles.Doc © 2023 by yukieiji, Hideko is licensed under CC BY 4.0';
         default:
-            return ``;
+            return '';
+    }
+}
+
+
+export function SearchPlaceHolder()
+{
+    const { locale } = useRouter()
+
+    switch(locale)
+    {
+        case 'ja-JP':
+            return 'Wiki内を検索...';
+        case 'en-US':
+            return 'Search Wiki...';
+        default:
+            return '';
+    }
+}
+
+export function TocTitle()
+{
+    const { locale } = useRouter()
+
+    switch(locale)
+    {
+        case 'ja-JP':
+            return 'このページのコンテンツ';
+        case 'en-US':
+            return 'On This Page';
+        default:
+            return '';
+    }
+}
+
+export function EditLink()
+{
+    const { locale } = useRouter()
+
+    switch(locale)
+    {
+        case 'ja-JP':
+            return 'このページを編集する';
+        case 'en-US':
+            return 'Edit this page';
+        default:
+            return '';
+    }
+}
+
+export function FeedbackContent()
+{
+    const { locale } = useRouter()
+
+    switch(locale)
+    {
+        case 'ja-JP':
+            return 'フィードバックを送る';
+        case 'en-US':
+            return 'Please give us your feedback';
+        default:
+            return '';
     }
 }
