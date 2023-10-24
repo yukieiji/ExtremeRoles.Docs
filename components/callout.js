@@ -2,40 +2,73 @@ import s from "/css/callout.module.css";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleExclamation, faNoteSticky, faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
 import {useRouter} from "next/router";
+
 export default function CustomCallout({ children, type, titleSize=16 }) {
-    const { locale } = useRouter()
-    let cn;
-    let warning;
-    let important;
-    let note;
-    if(locale === "ja-JP") {
-        warning = "注意"
-        important = "重要"
-        note = "ノート";
-    } else if(locale === "en-US") {
-        warning = "Warning"
-        important = "Important"
-        note = "Note";
-    }
-    if (type === "warning") {
-        cn = `${s.warning} ${s.box}`;
-    } else if (type === "important") {
-        cn = `${s.important} ${s.box}`;
-    } else if (type === "note") {
-        cn = `${s.note} ${s.box}`;
-    }
+
+    const className = getClass(type)
+    const titleClassName = getTitleClass(type)
+    const icon = getIcon(type)
+    const title = getTitle(type);
+
     return (
         <>
-            <div className={cn}>
+            <div className={className}>
                 <div>
-                    {type === "warning" && <div className={`${s.title} ${s.warningtitle}`} style={{fontSize: titleSize}}> <FontAwesomeIcon icon={faTriangleExclamation} width={titleSize}/><p>{warning}</p> </div>}
-                    {type === "important" && <div className={`${s.title} ${s.importanttitle}`} style={{fontSize: titleSize}}> <FontAwesomeIcon icon={faCircleExclamation} width={titleSize}/> <p>{important}</p> </div>}
-                    {type === "note" && <div className={`${s.title} ${s.notetitle}`} style={{fontSize: titleSize}}> <FontAwesomeIcon icon={faNoteSticky} width={titleSize}/> <p>{note}</p> </div>}
+                    <div className={titleClassName} style={{fontSize: titleSize}}>
+                        <FontAwesomeIcon icon={icon} width={titleSize}/>
+                        <p>{title}</p>
+                    </div>
                 </div>
-                <div className={s.texts}>
-                    <div>{children}</div>
-                </div>
+                <div className={s.texts}>{children}</div>
             </div>
         </>
     );
+}
+
+function getClass(type) {
+    const c = s[type] || '';
+    return `${c} ${s.box}`;
+}
+
+function getTitleClass(type) {
+    return `${s.title} ${s[type + 'title'] || ''}`.trim();
+}
+
+function getIcon(type)
+{
+    switch(type)
+    {
+        case "warning":
+            return faTriangleExclamation;
+        case "important":
+            return faCircleExclamation;
+        case "note":
+            return faNoteSticky;
+    }
+}
+
+function getTitle(type) {
+    const { locale } = useRouter();
+    switch(locale) {
+        case "ja-JP":
+            switch(type) {
+                case "warning":
+                    return "注意";
+                case "important":
+                    return "重要";
+                case "note":
+                    return "ノート";
+            }
+            break
+        case "en-US":
+            switch(type) {
+                case "warning":
+                    return "Warning";
+                case "important":
+                    return "Important";
+                case "note":
+                    return "Note";
+            }
+            break
+    }
 }
