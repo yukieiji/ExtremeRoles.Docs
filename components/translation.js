@@ -47,3 +47,19 @@ export function Note()
             return ``;
     }
 }
+
+export function Footer()
+{
+
+    const { locale } = useRouter()
+
+    switch(locale)
+    {
+        case "ja-JP":
+            return "ExtremeRoles.Doc © 2023 by yukieiji, HidekoはCC BY 4.0によってライセンスされています。";
+        case "en-US":
+            return "ExtremeRoles.Doc © 2023 by yukieiji, Hideko is licensed under CC BY 4.0";
+        default:
+            return ``;
+    }
+}
