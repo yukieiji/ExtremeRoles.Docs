@@ -1,3 +1,40 @@
 {
-  "index": "Welcome"
+  "index": "Welcome",
+  "role": "Additional Roles",
+  "homepage": {
+    "title": "Homepage",
+    "type": "page",
+    "href": "https://homepage.link"
+  },
+  "repo": {
+    "title": "Repositories",
+    "type": "menu",
+    "items": {
+      "exr": {
+        "title": "ExtremeRoles",
+        "href": "https://github.com/yukieiji/ExtremeRoles",
+        "newWindow": true
+      },
+      "exr-hats": {
+        "title": "ExtremeHats",
+        "href": "https://github.com/yukieiji/ExtremeHats",
+        "newWindow": true
+      },
+      "exr-nameplate": {
+        "title": "ExtremeNamePlate",
+        "href": "https://github.com/yukieiji/ExtreemNamePlate",
+        "newWindow": true
+      },
+      "exr-visor": {
+        "title": "ExtremeVisor",
+        "href": "https://github.com/yukieiji/ExtremeVisor",
+        "newWindow": true
+      },
+      "exr-docs": {
+        "title": "Document",
+        "href": "https://github.com/yukieiji/ExtremeRoles.Docs",
+        "newWindow": true
+      }
+    }
+  }
 }

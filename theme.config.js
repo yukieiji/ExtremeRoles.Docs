@@ -1,4 +1,5 @@
 import Logo from "/components/logo";
+import { useRouter } from 'next/router'
 
 export default {
     useNextSeoProps() {
@@ -22,6 +23,13 @@ export default {
         { locale: 'en-US', text: 'English' },
     ],
     search: {
-        placeholder: "Search documentation..."
+        placeholder: (() => {
+            const { locale } = useRouter();
+            if(locale === "ja-JP") {
+                return "ドキュメントを検索...";
+            } else if(locale === "en-US") {
+                return "Search documentation...";
+            }
+        })
     }
 }
