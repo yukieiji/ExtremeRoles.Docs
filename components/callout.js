@@ -31,46 +31,14 @@ export default function CustomCallout({ children, type, titleSize=16 }) {
 
 function GetCalloutClassName(type)
 {
-    let cn;
-
-    switch(type)
-    {
-        case "warning":
-            cn = `${s.warning}`;
-            break
-        case "important":
-            cn = `${s.important}`;
-            break
-        case "note":
-            cn = `${s.note}`;
-            break
-        default:
-            break
-    }
-
-    return cn + ` ${s.box}`;
+    const className = s[type] || '';
+    return `${className} ${s.box}`;
 }
 
 function GetCalloutTitleClassName(type)
 {
-    let cn = `${s.title} `;
-
-    switch(type)
-    {
-        case "warning":
-            cn += `${s.warningtitle}`;
-            break
-        case "important":
-            cn += `${s.importanttitle}`;
-            break
-        case "note":
-            cn += `${s.notetitle}`;
-            break
-        default:
-            break
-    }
-
-    return cn;
+    const className = s[type + 'title'] || '';
+    return `${s.title} ${className}`.trim();
 }
 
 function GetTitele(type)
