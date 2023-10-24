@@ -1,7 +1,7 @@
 import s from "/css/callout.module.css";
+import {Warning, Important, Note } from "/components/translation";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleExclamation, faNoteSticky, faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
-import {useRouter} from "next/router";
 
 export default function CustomCallout({ children, type, titleSize=16 }) {
 
@@ -78,11 +78,11 @@ function GetTitele(type)
     switch(type)
     {
         case "warning":
-            return GetWarningTransData();
+            return Warning();
         case "important":
-            return GetImportantTransData();
+            return Important();
         case "note":
-            return GetNoteTransData();
+            return Note();
         default:
             return ``;
     }
@@ -98,55 +98,6 @@ function GetIcon(type)
             return faCircleExclamation;
         case "note":
             return faNoteSticky;
-        default:
-            return ``;
-    }
-}
-
-
-function GetWarningTransData()
-{
-
-    const { locale } = useRouter()
-
-    switch(locale)
-    {
-        case "ja-JP":
-            return "注意"
-        case "en-US":
-            return "Warning"
-        default:
-            return ``;
-    }
-}
-
-function GetImportantTransData()
-{
-
-    const { locale } = useRouter()
-
-    switch(locale)
-    {
-        case "ja-JP":
-            return "重要"
-        case "en-US":
-            return "Important"
-        default:
-            return ``;
-    }
-}
-
-function GetNoteTransData()
-{
-
-    const { locale } = useRouter()
-
-    switch(locale)
-    {
-        case "ja-JP":
-            return "ノート"
-        case "en-US":
-            return "Note"
         default:
             return ``;
     }
