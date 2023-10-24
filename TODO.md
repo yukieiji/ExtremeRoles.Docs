@@ -4,7 +4,7 @@
 - [ ] : 各種英語部分の多言語化(検索バーやOn This Page等)
 
 ## 優先度:中
-- [ ] : [JTD形式のCallOuts](https://just-the-docs.com/docs/ui-components/callouts/)の追加、類似で良い
+- [x] : [JTD形式のCallOuts](https://just-the-docs.com/docs/ui-components/callouts/)の追加、類似で良い
 - [ ] : [JTD形式のButton](https://just-the-docs.com/docs/ui-components/buttons/)の追加、類似で良い
 
 ## 優先度:低
