@@ -1,6 +1,5 @@
 import Logo from "/components/logo";
 import { useRouter } from 'next/router'
-
 export default {
     useNextSeoProps() {
         return {
@@ -25,10 +24,36 @@ export default {
     search: {
         placeholder: (() => {
             const { locale } = useRouter();
-            if(locale === "ja-JP") {
-                return "ドキュメントを検索...";
-            } else if(locale === "en-US") {
-                return "Search documentation...";
+            switch (locale) {
+                case "ja-JP": return "ドキュメントを検索..."
+                case "en-US": return "Search documentation..."
+            }
+        })
+    },
+    toc: {
+        title: (() => {
+            const { locale } = useRouter();
+            switch (locale) {
+                case "ja-JP": return "このページの移動先"
+                case "en-US": return "Go to this page"
+            }
+        }),
+    },
+    editLink: {
+        text: (() => {
+            const { locale } = useRouter();
+            switch (locale) {
+                case "ja-JP": return "このページを変更する。"
+                case "en-US": return "Edit this page"
+            }
+        })
+    },
+    feedback: {
+        content: (() => {
+            const { locale } = useRouter();
+            switch (locale) {
+                case "ja-JP": return "是非私たちにフィードバックをお願いします。"
+                case "en-US": return "Please give us your feedback."
             }
         })
     }
