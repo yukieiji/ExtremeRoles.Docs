@@ -107,7 +107,7 @@ function GetIcon(type)
 function GetWarningTransData()
 {
 
-    const { locale, _ } = useRouter()
+    const { locale } = useRouter()
 
     switch(locale)
     {
@@ -123,7 +123,7 @@ function GetWarningTransData()
 function GetImportantTransData()
 {
 
-    const { locale, _ } = useRouter()
+    const { locale } = useRouter()
 
     switch(locale)
     {
@@ -139,7 +139,7 @@ function GetImportantTransData()
 function GetNoteTransData()
 {
 
-    const { locale, _ } = useRouter()
+    const { locale } = useRouter()
 
     switch(locale)
     {
