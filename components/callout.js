@@ -1,14 +1,14 @@
-import s from "/css/callout.module.css";
-import {Warning, Important, Note } from "/components/translation";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCircleExclamation, faNoteSticky, faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
+import s from '/css/callout.module.css';
+import {Warning, Important, Note } from '/components/translation';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faCircleExclamation, faNoteSticky, faTriangleExclamation} from '@fortawesome/free-solid-svg-icons';
 
 export default function CustomCallout({ children, type, titleSize=16 }) {
 
-    const className = GetCalloutClassName(type)
-    const titleClassName = GetCalloutTitleClassName(type)
-    const icon = GetIcon(type)
-    const title = GetTitele(type)
+    const className = getClassName(type)
+    const titleClassName = getTitleClassName(type)
+    const icon = getIcon(type)
+    const title = getTitle(type)
 
     return (
         <>
@@ -29,76 +29,44 @@ export default function CustomCallout({ children, type, titleSize=16 }) {
     );
 }
 
-function GetCalloutClassName(type)
+function getClassName(type)
 {
-    let cn;
-
-    switch(type)
-    {
-        case "warning":
-            cn = `${s.warning}`;
-            break
-        case "important":
-            cn = `${s.important}`;
-            break
-        case "note":
-            cn = `${s.note}`;
-            break
-        default:
-            break
-    }
-
-    return cn + ` ${s.box}`;
+    const className = s[type] || '';
+    return `${className} ${s.box}`;
 }
 
-function GetCalloutTitleClassName(type)
+function getTitleClassName(type)
 {
-    let cn = `${s.title} `;
-
-    switch(type)
-    {
-        case "warning":
-            cn += `${s.warningtitle}`;
-            break
-        case "important":
-            cn += `${s.importanttitle}`;
-            break
-        case "note":
-            cn += `${s.notetitle}`;
-            break
-        default:
-            break
-    }
-
-    return cn;
+    const className = s[type + 'title'] || '';
+    return `${s.title} ${className}`.trim();
 }
 
-function GetTitele(type)
+function getTitle(type)
 {
     switch(type)
     {
-        case "warning":
+        case 'warning':
             return Warning();
-        case "important":
+        case 'important':
             return Important();
-        case "note":
+        case 'note':
             return Note();
         default:
-            return ``;
+            return '';
     }
 }
 
-function GetIcon(type)
+function getIcon(type)
 {
     switch(type)
     {
-        case "warning":
+        case 'warning':
             return faTriangleExclamation;
-        case "important":
+        case 'important':
             return faCircleExclamation;
-        case "note":
+        case 'note':
             return faNoteSticky;
         default:
-            return ``;
+            return '';
     }
 }
