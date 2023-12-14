@@ -31,3 +31,6 @@ Extreme RolesはAmongUsの上級者(初心者)向けのロール追加MODです�
 
 ### Wiki内
 - [追加役職一覧](https://yukieiji.github.io/ExtremeRoles.Docs/docs/%E8%BF%BD%E5%8A%A0%E5%BD%B9%E8%81%B7/%E8%BF%BD%E5%8A%A0%E5%BD%B9%E8%81%B7.html)
+
+### クレジット
+- VOICEVOX:ずんだもん
