@@ -2,7 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     Ascii85 (1.1.0)
-    addressable (2.8.5)
+    addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
     afm (0.2.2)
     async (2.6.4)
@@ -10,7 +10,7 @@ GEM
       fiber-annotation
       io-event (~> 1.1)
       timers (~> 4.1)
-    base64 (0.1.1)
+    base64 (0.2.0)
     colorator (1.1.0)
     concurrent-ruby (1.2.2)
     console (1.23.2)
@@ -22,7 +22,7 @@ GEM
     ethon (0.16.0)
       ffi (>= 1.15.0)
     eventmachine (1.2.7)
-    faraday (2.7.11)
+    faraday (2.8.1)
       base64
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
@@ -64,7 +64,7 @@ GEM
       safe_yaml (~> 1.0)
       terminal-table (>= 1.8, < 4.0)
       webrick (~> 1.7)
-    jekyll-github-metadata (2.16.0)
+    jekyll-github-metadata (2.16.1)
       jekyll (>= 3.4, < 5.0)
       octokit (>= 4, < 7, != 4.4.0)
     jekyll-include-cache (0.2.1)
@@ -106,7 +106,7 @@ GEM
       hashery (~> 2.0)
       ruby-rc4
       ttfunk
-    public_suffix (5.0.3)
+    public_suffix (5.0.4)
     racc (1.7.1)
     rainbow (3.1.1)
     rake (13.0.6)
@@ -143,7 +143,7 @@ PLATFORMS
 DEPENDENCIES
   html-proofer (~> 5.0)
   jekyll (~> 4.3.3)
-  jekyll-github-metadata (>= 2.16)
+  jekyll-github-metadata (>= 2.15)
   jekyll-include-cache
   jekyll-sitemap
   just-the-docs (= 0.7.0)
