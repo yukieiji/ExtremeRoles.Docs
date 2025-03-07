@@ -3,7 +3,7 @@ layout: default
 title: ExtremeSkins
 description: ExtremeRolesの読み上げアドオンExtreme Skinsについて
 lang: ja_JP
-nav_order: 7
+nav_order: 8
 has_children: true
 ---
 

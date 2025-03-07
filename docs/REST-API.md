@@ -3,7 +3,7 @@ layout: default
 title: REST API
 description: ExtremeRolesのRESET API
 lang: ja_JP
-nav_order: 9
+nav_order: 10
 has_children: true
 ---
 
