@@ -32,5 +32,15 @@ Extreme RolesはAmongUsの上級者(初心者)向けのロール追加MODです�
 ### Wiki内
 - [追加役職一覧](https://yukieiji.github.io/ExtremeRoles.Docs/docs/%E8%BF%BD%E5%8A%A0%E5%BD%B9%E8%81%B7/%E8%BF%BD%E5%8A%A0%E5%BD%B9%E8%81%B7.html)
 
-### クレジット
+## Q＆A
+
+### Q:ルームコードをコピーできない
+A:v13.0.1.0以降、直接的にゲームに参加できるリンクをコピーするように変更されております(圧倒的にこちらの方が良いと判断しています)、通常のルームコードに関しては「**Shiftキー**」を押しながらコピーしてください
+
+### Q:役職のボタンの能力が勝手に発動してしまう
+A:役職のボタン能力は**Fキー**か**Cキー**にショートカットが割り当てられています(詳細は[こちら](https://yukieiji.github.io/ExtremeRoles.Docs/docs/%E3%82%AD%E3%83%BC%E3%83%90%E3%82%A4%E3%83%B3%E3%83%89.html))、それらのキーの誤爆が考えられます
+
+
+
+## クレジット
 - VOICEVOX:ずんだもん
