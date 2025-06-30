@@ -5,7 +5,7 @@ theme: just-the-docs
 
 url: https://yukieiji.github.io/ExtremeRoles.Doc
 
-search_enabled: false
+search_enabled: true
 
 search:
 

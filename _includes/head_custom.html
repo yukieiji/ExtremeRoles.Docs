@@ -1,0 +1,18 @@
+<!-- Algolia DocSearch v3 -->
+<script type="text/javascript">
+  (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://cdn.jsdelivr.net/npm/@docsearch/js@3";
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window,document,"docsearch","script");
+
+  docsearch({
+    appId: "YOUR_APP_ID",
+    apiKey: "YOUR_SEARCH_API_KEY",
+    indexName: "YOUR_INDEX_NAME",
+    container: '#algolia-search-input', // CSSセレクタまたはDOM要素
+    // DocSearch v3 の他のオプションについてはドキュメントを参照してください
+    // https://docsearch.algolia.com/docs/DocSearch-v3/introduction/what-is-docsearch
+    debug: false // 問題が発生した場合はtrueに設定
+  });
+</script>
