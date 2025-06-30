@@ -18,7 +18,7 @@ def check_duplicates
 
   # docsディレクトリ内のMarkdownファイルを処理
   Find.find("docs") do |path|
-    if path.end_with?(".md") && path.end_with?("追加役職.md")
+    if path.end_with?(".md") # Removed "&& path.end_with?("追加役職.md")"
       begin
         content = File.read(path)
         # Front matterを抽出
@@ -28,8 +28,20 @@ def check_duplicates
           front_matter = YAML.safe_load(front_matter_str) || {} # 空の場合を考慮
           titles[front_matter['title']] << path if front_matter['title']
           if front_matter['nav_order']
-            parent_dir = File.dirname(path)
-            nav_orders[parent_dir][front_matter['nav_order']] << path
+            base_name = File.basename(path, ".md")
+            parent_dir_name = File.basename(File.dirname(path))
+            current_parent_dir = File.dirname(path)
+
+            comparison_dir = if base_name == parent_dir_name
+                               # 親フォルダと同じ名前のmdファイルの場合、親ディレクトリのnav_orderと比較
+                               # 例 : a/b/b.md => b.mdはaフォルダ内のnav_orderと比較
+                               File.dirname(current_parent_dir)
+                             else
+                               # 上記以外は現ディレクトリのnav_orderと比較
+                               # 例 : a/b/c.md => c.mdはbフォルダ内のnav_orderと比較
+                               current_parent_dir
+                             end
+            nav_orders[comparison_dir][front_matter['nav_order']] << path
           end
         else
           # errors << "警告: #{path} にFront matterが見つかりません。" # 必要に応じてコメント解除
