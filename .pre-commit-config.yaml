@@ -1,0 +1,19 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+-   repo: local
+    hooks:
+    -   id: validate-site-config
+        name: Validate site configuration (title/nav_order duplicates)
+        entry: bundle exec rake test:site
+        language: system # 'system' はローカルにインストールされたコマンドを実行
+        # `types: [file]` を指定すると全てのファイルタイプで実行されてしまうため、
+        # ここでは指定せず、コミットされるファイル全体に対して一度だけ実行されるようにする。
+        # もし特定のファイルタイプに限定したい場合は、適切に設定する。
+        # 例えばRubyやMarkdownファイルのみを対象にするなら以下のようにするが、
+        # Rakeタスクはサイト全体をチェックするので、ファイル指定は不要。
+        # types: [ruby, markdown]
+        pass_filenames: false # Rakeタスクはファイル名を引数に取らないのでfalse
+        always_run: true      # コミットされるファイルがなくても常に実行 (ステージング内容に関わらずチェック)
+        # verbose: true       # 詳細ログを出力したい場合
+        # stages: [commit]    # commit時のみ (デフォルト)
