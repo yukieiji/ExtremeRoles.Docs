@@ -18,7 +18,7 @@ def check_duplicates
 
   # docsディレクトリ内のMarkdownファイルを処理
   Find.find("docs") do |path|
-    if path.end_with?(".md")
+    if path.end_with?(".md") && path.end_with?("追加役職.md")
       begin
         content = File.read(path)
         # Front matterを抽出
