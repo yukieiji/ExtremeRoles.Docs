@@ -3,6 +3,7 @@ import argparse
 import sys
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
+import re
 
 @dataclass
 class RoleInfo:
@@ -19,6 +20,14 @@ ROLE_TYPE_MAP: dict[str, str] = {
 }
 
 BLACKLISTED_SUFFIXES: list[str] = ["FullDescription", "IntroDescription", "ShortDescription"]
+
+def format_option_name(name: str) -> str:
+    """Converts PascalCase or camelCase to a more readable space-separated string."""
+    if not name:
+        return ""
+    # Add a space before each uppercase letter, then strip leading/trailing space
+    s1 = re.sub('(.)([A-Z][a-z]+)', r'\1 \2', name)
+    return re.sub('([a-z0-9])([A-Z])', r'\1 \2', s1).strip()
 
 def find_role_info(name_en: str, resx_dir: str) -> RoleInfo | None:
     """
@@ -85,9 +94,9 @@ def find_role_info(name_en: str, resx_dir: str) -> RoleInfo | None:
 
     return None
 
-def create_role_markdown(role_info: RoleInfo, base_dir: str = "/app/docs/追加役職") -> None:
+def create_role_markdown(role_info: RoleInfo, base_dir: str) -> None:
     """
-    Creates a new markdown file for a role, including description and options table.
+    Creates a new markdown file for a role, including a single, combined options table.
     """
     role_type_dir = os.path.join(base_dir, role_info.type_ja)
     os.makedirs(role_type_dir, exist_ok=True)
@@ -100,14 +109,48 @@ def create_role_markdown(role_info: RoleInfo, base_dir: str = "/app/docs/追加�
         print(f"Error: File '{file_path}' already exists.")
         return
 
-    options_table = "| オプション名 | 詳細 |\n| ---- | ---- |\n"
+    # --- Dynamically build a single, combined options list ---
+    all_options: list[dict[str, str]] = []
+
+    # First, add common options if applicable
+    if "ゴースト" not in role_info.type_ja:
+        common_options: list[dict[str, str]] = []
+        common_options.append({"name": "スポーン数", "value": "何人この役職にアサインされるか"})
+
+        if role_info.type_ja == "インポスター":
+            common_options.append({"name": "別の視界設定を持つか", "value": "ゲームで設定されているインポスターの視界設定と別の視界設定を持つか"})
+            common_options.append({"name": "ビジョン", "value": "視界の広さ"})
+        else: # Crew, Neutral, Combination, etc.
+            common_options.append({"name": "別の視界設定を持つか", "value": "ゲームで設定されているクルーの視界設定と別の視界設定を持つか"})
+            common_options.append({"name": "ビジョン", "value": "ゲームで設定されている視界効果と別の視界設定を持つか"})
+
+        if role_info.type_ja in ["クルー", "インポスター"]:
+             common_options.append({"name": "視界効果を受けるか", "value": "停電等の視界効果を受けるかどうか"})
+
+        if role_info.type_ja == "インポスター":
+            common_options.extend([
+                {"name": "別のキルクールタイムを持つか", "value": "ゲームで設定されているキルクールと別のキルクール設定を持つか"},
+                {"name": "キルクールタイム", "value": "キルクールタイムの設定"},
+                {"name": "別のキルレンジを持つか", "value": "ゲームで設定されているキルレンジと別のキルレンジ設定を持つか"},
+                {"name": "キルレンジ", "value": "キルレンジ"}
+            ])
+        all_options.extend(common_options)
+
+    # Next, add role-specific options
     if role_info.options:
         for opt in sorted(role_info.options, key=lambda x: x['name']):
-            display_name = opt['name'].replace(role_info.name_en, '', 1)
-            display_value = opt['value'].replace('\n', ' ')
-            options_table += f"| {display_name} | {display_value} |\n"
+            display_name = format_option_name(opt['name'].replace(role_info.name_en, '', 1))
+            all_options.append({"name": display_name, "value": opt['value']})
+
+    # Now, build the final table section
+    options_section = ""
+    if all_options:
+        table_header = "| オプション名 | 詳細 |\n| ---- | ---- |"
+        table_rows = [f"| {opt['name']} | {opt['value'].replace('\n', ' ')} |" for opt in all_options]
+        table_body = "\n".join(table_rows)
+        options_section = f"## オプション\n{table_header}\n{table_body}\n"
     else:
-        options_table += "| (オプションなし) | |\n"
+        options_section = "## オプション\n\n(オプションなし)\n"
 
     description_section = role_info.full_description if role_info.full_description else "*説明文が.resxファイルに見つかりませんでした。手動で追加してください。*"
 
@@ -123,9 +166,7 @@ parent: {role_info.type_ja}
 
 {description_section}
 
-## オプション
-
-{options_table}
+{options_section}
 """
     with open(file_path, "w", encoding="utf-8") as f:
         f.write(content)
@@ -134,7 +175,8 @@ parent: {role_info.type_ja}
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Create a new role markdown file by looking up role info in .resx files.")
     parser.add_argument("name_en", help="The English name of the role (e.g., Captain).")
-    parser.add_argument("--resx-dir", default="temp_resx_files/", help="The directory containing the .resx localization files.")
+    parser.add_argument("--resx-dir", default="temp_resx_files", help="The directory containing the .resx localization files.")
+    parser.add_argument("--output-dir", default="docs/追加役職", help="The base output directory for the markdown files.")
     args = parser.parse_args()
 
     print(f"Searching for English role '{args.name_en}' in directory '{args.resx_dir}'...")
@@ -146,6 +188,6 @@ if __name__ == "__main__":
         print(f"Found Japanese type: '{role_info.type_ja}'")
         print(f"Found {len(role_info.options)} options.")
         print(f"Found description: {'Yes' if role_info.full_description else 'No'}")
-        create_role_markdown(role_info)
+        create_role_markdown(role_info, args.output_dir)
     else:
         print(f"Error: Could not find role information for '{args.name_en}' in the specified .resx directory.")
