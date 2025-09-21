@@ -115,8 +115,10 @@ def create_role_markdown(role_info: RoleInfo, base_dir: str = "docs/追加役職
 
     # First, add common options if applicable
     if "ゴースト" not in role_info.type_ja:
-        common_options: list[dict[str, str]] = []
-        common_options.append({"name": "スポーン数", "value": "何人この役職にアサインされるか"})
+        common_options: list[dict[str, str]] = [
+            {"name": role_info.name_ja, "value": "役職のスポーンレート"},
+            {"name":"スポーン数", "value": "何人この役職にアサインされるか"}
+        ]
 
         if role_info.type_ja == "インポスター":
             common_options.append({"name": "別の視界設定を持つか", "value": "ゲームで設定されているインポスターの視界設定と別の視界設定を持つか"})
