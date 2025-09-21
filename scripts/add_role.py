@@ -102,7 +102,7 @@ def create_role_markdown(role_info: RoleInfo, base_dir: str = "docs/追加役職
     role_type_dir = os.path.join(base_dir, role_info.type_ja)
     os.makedirs(role_type_dir, exist_ok=True)
     try:
-        nav_order = len([f for f in os.listdir(role_type_dir) if f.endswith('.md')]) + 1
+        nav_order = len([f for f in os.listdir(role_type_dir) if f.endswith('.md')]) + 2
     except FileNotFoundError:
         nav_order = 1
     file_path = os.path.join(role_type_dir, f"{role_info.name_ja}.md")
