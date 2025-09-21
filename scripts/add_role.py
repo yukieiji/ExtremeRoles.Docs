@@ -159,7 +159,7 @@ layout: default
 title: {role_info.name_ja}
 nav_order: {nav_order}
 grand_parent: 追加役職
-parent: {role_info.type_ja}
+parent: {role_info.type_ja if role_info.type_ja != "クルー" else "クルーメイト"}
 ---
 
 # {role_info.name_ja}
