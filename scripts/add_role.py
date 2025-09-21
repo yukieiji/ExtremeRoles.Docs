@@ -21,14 +21,6 @@ ROLE_TYPE_MAP: dict[str, str] = {
 
 BLACKLISTED_SUFFIXES: list[str] = ["FullDescription", "IntroDescription", "ShortDescription"]
 
-def format_option_name(name: str) -> str:
-    """Converts PascalCase or camelCase to a more readable space-separated string."""
-    if not name:
-        return ""
-    # Add a space before each uppercase letter, then strip leading/trailing space
-    s1 = re.sub('(.)([A-Z][a-z]+)', r'\1 \2', name)
-    return re.sub('([a-z0-9])([A-Z])', r'\1 \2', s1).strip()
-
 def find_role_info(name_en: str, resx_dir: str) -> RoleInfo | None:
     """
     Searches .resx files to find role information, including options and description.
@@ -110,7 +102,7 @@ def create_role_markdown(role_info: RoleInfo, base_dir: str) -> None:
         return
 
     # --- Dynamically build a single, combined options list ---
-    all_options: list[dict[str, str]] = []
+    all_option_rows = []
 
     # First, add common options if applicable
     if "ゴースト" not in role_info.type_ja:
@@ -134,20 +126,21 @@ def create_role_markdown(role_info: RoleInfo, base_dir: str) -> None:
                 {"name": "別のキルレンジを持つか", "value": "ゲームで設定されているキルレンジと別のキルレンジ設定を持つか"},
                 {"name": "キルレンジ", "value": "キルレンジ"}
             ])
-        all_options.extend(common_options)
+
+        for opt in common_options:
+             all_option_rows.append(f"| {opt['name']} | {opt['value']} |")
 
     # Next, add role-specific options
     if role_info.options:
         for opt in sorted(role_info.options, key=lambda x: x['name']):
-            display_name = format_option_name(opt['name'].replace(role_info.name_en, '', 1))
-            all_options.append({"name": display_name, "value": opt['value']})
+            option_text = opt['value'].replace('\n', ' ')
+            all_option_rows.append(f"| {option_text} | {option_text} |")
 
     # Now, build the final table section
     options_section = ""
-    if all_options:
+    if all_option_rows:
         table_header = "| オプション名 | 詳細 |\n| ---- | ---- |"
-        table_rows = [f"| {opt['name']} | {opt['value'].replace('\n', ' ')} |" for opt in all_options]
-        table_body = "\n".join(table_rows)
+        table_body = "\n".join(all_option_rows)
         options_section = f"## オプション\n{table_header}\n{table_body}\n"
     else:
         options_section = "## オプション\n\n(オプションなし)\n"
