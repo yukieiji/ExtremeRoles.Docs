@@ -1,8 +1,9 @@
 import os
-import argparse
 import sys
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
+
+from jsonargparse import auto_cli
 import re
 
 @dataclass
@@ -13,10 +14,19 @@ class RoleInfo:
     options: list[dict[str, str]]
     full_description: str | None
 
+@dataclass
+class Args:
+    role_name: str
+    resx_dir: str = "../ExtremeRoles/Translation/resx"
+
 ROLE_TYPE_MAP: dict[str, str] = {
-    "Crewmate": "クルー", "Impostor": "インポスター", "Neutral": "ニュートラル",
-    "Combination": "コンビネーション役職", "GhostCrew": "ゴーストクルー",
-    "GhostImpostor": "ゴーストインポスター", "GhostNeutral": "ゴーストニュートラル",
+    "Crewmate": "クルー",
+    "Impostor": "インポスター",
+    "Neutral": "ニュートラル",
+    "Combination": "コンビネーション役職",
+    "GhostCrew": "ゴーストクルー",
+    "GhostImpostor": "ゴーストインポスター",
+    "GhostNeutral": "ゴーストニュートラル",
 }
 
 BLACKLISTED_SUFFIXES: list[str] = ["FullDescription", "IntroDescription", "ShortDescription"]
@@ -86,9 +96,12 @@ def find_role_info(name_en: str, resx_dir: str) -> RoleInfo | None:
 
     return None
 
-def create_role_markdown(role_info: RoleInfo, base_dir: str) -> None:
+def create_role_markdown(role_info: RoleInfo, base_dir: str = "docs/追加役職") -> None:
     """
-    Creates a new markdown file for a role, including a single, combined options table.
+    Creates a new markdown file for a role, including description and options table.
+    Args:
+        role_info: parsed role info
+        base_dir: The directory to add md
     """
     role_type_dir = os.path.join(base_dir, role_info.type_ja)
     os.makedirs(role_type_dir, exist_ok=True)
@@ -155,7 +168,7 @@ grand_parent: 追加役職
 parent: {role_info.type_ja}
 ---
 
-# {role_info.name_en} ({role_info.name_ja})
+# {role_info.name_ja}
 
 {description_section}
 
@@ -165,16 +178,17 @@ parent: {role_info.type_ja}
         f.write(content)
     print(f"Successfully created '{file_path}'")
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Create a new role markdown file by looking up role info in .resx files.")
-    parser.add_argument("name_en", help="The English name of the role (e.g., Captain).")
-    parser.add_argument("--resx-dir", default="temp_resx_files", help="The directory containing the .resx localization files.")
-    parser.add_argument("--output-dir", default="docs/追加役職", help="The base output directory for the markdown files.")
-    args = parser.parse_args()
+def main(role_name_en: str, resx_dir: str="../ExtremeRoles/Translation/resx"):
+    """Create a new role markdown file by looking up role info in .resx files."
 
-    print(f"Searching for English role '{args.name_en}' in directory '{args.resx_dir}'...")
+    Args:
+        role_name_en: The English name of the role (e.g., Captain).
+        resx_dir: The directory containing the .resx localization files.
+    """
 
-    role_info = find_role_info(args.name_en, args.resx_dir)
+    print(f"Searching for English role '{role_name_en}' in directory '{resx_dir}'...")
+
+    role_info = find_role_info(role_name_en, resx_dir)
 
     if role_info:
         print(f"Found Japanese name: '{role_info.name_ja}'")
@@ -183,4 +197,8 @@ if __name__ == "__main__":
         print(f"Found description: {'Yes' if role_info.full_description else 'No'}")
         create_role_markdown(role_info, args.output_dir)
     else:
-        print(f"Error: Could not find role information for '{args.name_en}' in the specified .resx directory.")
+        print(f"Error: Could not find role information for '{role_name_en}' in the specified .resx directory.")
+
+
+if __name__ == "__main__":
+    auto_cli(main)
