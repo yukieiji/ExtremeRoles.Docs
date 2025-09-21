@@ -1,10 +1,10 @@
 import os
+import re
 import sys
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 
 from jsonargparse import auto_cli
-import re
 
 @dataclass
 class RoleInfo:
@@ -67,23 +67,24 @@ def find_role_info(name_en: str, resx_dir: str) -> RoleInfo | None:
                 node_name = data_node.get("name")
                 if not node_name:
                     continue
+                if not node_name.lower().startswith(name_en.lower()):
+                    continue
+                if node_name.lower() == name_en.lower():
+                    continue
 
-                if node_name.lower().startswith(name_en.lower()):
-                    if node_name.lower() == name_en.lower():
-                        continue
+                if node_name.endswith("FullDescription"):
+                    description_node = data_node.find("value")
+                    if description_node is not None:
+                        full_description = description_node.text
+                    continue
 
-                    if node_name.endswith("FullDescription"):
-                        description_node = data_node.find("value")
-                        if description_node is not None:
-                            full_description = description_node.text
-                        continue
+                if any(node_name.endswith(suffix) for suffix in BLACKLISTED_SUFFIXES):
+                    continue
 
-                    if any(node_name.endswith(suffix) for suffix in BLACKLISTED_SUFFIXES):
-                        continue
-
-                    value_node = data_node.find("value")
-                    if value_node is not None and value_node.text:
-                        options.append({"name": node_name, "value": value_node.text})
+                value_node = data_node.find("value")
+                if value_node is not None and value_node.text:
+                    options.append({"name": node_name, "value": value_node.text})
+                    
 
             return RoleInfo(
                 name_ja=name_ja, name_en=name_en, type_ja=type_ja,
@@ -124,13 +125,11 @@ def create_role_markdown(role_info: RoleInfo, base_dir: str = "docs/追加役職
 
         if role_info.type_ja == "インポスター":
             common_options.append({"name": "別の視界設定を持つか", "value": "ゲームで設定されているインポスターの視界設定と別の視界設定を持つか"})
-            common_options.append({"name": "ビジョン", "value": "視界の広さ"})
         else: # Crew, Neutral, Combination, etc.
             common_options.append({"name": "別の視界設定を持つか", "value": "ゲームで設定されているクルーの視界設定と別の視界設定を持つか"})
-            common_options.append({"name": "ビジョン", "value": "ゲームで設定されている視界効果と別の視界設定を持つか"})
-
-        if role_info.type_ja in ["クルー", "インポスター"]:
-             common_options.append({"name": "視界効果を受けるか", "value": "停電等の視界効果を受けるかどうか"})
+        
+        common_options.append({"name": "ビジョン", "value": "視界の広さ"})
+        common_options.append({"name": "視界効果を受けるか", "value": "停電等の視界効果を受けるかどうか"})
 
         if role_info.type_ja == "インポスター":
             common_options.extend([
@@ -178,12 +177,13 @@ parent: {role_info.type_ja}
         f.write(content)
     print(f"Successfully created '{file_path}'")
 
-def main(role_name_en: str, resx_dir: str="../ExtremeRoles/Translation/resx"):
+def main(role_name_en: str, resx_dir: str="../ExtremeRoles/Translation/resx", out_dir: str= "docs/追加役職"):
     """Create a new role markdown file by looking up role info in .resx files."
 
     Args:
         role_name_en: The English name of the role (e.g., Captain).
         resx_dir: The directory containing the .resx localization files.
+        out_dir: The directory to add md
     """
 
     print(f"Searching for English role '{role_name_en}' in directory '{resx_dir}'...")
@@ -195,7 +195,7 @@ def main(role_name_en: str, resx_dir: str="../ExtremeRoles/Translation/resx"):
         print(f"Found Japanese type: '{role_info.type_ja}'")
         print(f"Found {len(role_info.options)} options.")
         print(f"Found description: {'Yes' if role_info.full_description else 'No'}")
-        create_role_markdown(role_info, args.output_dir)
+        create_role_markdown(role_info, out_dir)
     else:
         print(f"Error: Could not find role information for '{role_name_en}' in the specified .resx directory.")
 
