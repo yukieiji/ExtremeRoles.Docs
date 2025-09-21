@@ -14,11 +14,6 @@ class RoleInfo:
     options: list[dict[str, str]]
     full_description: str | None
 
-@dataclass
-class Args:
-    role_name: str
-    resx_dir: str = "../ExtremeRoles/Translation/resx"
-
 ROLE_TYPE_MAP: dict[str, str] = {
     "Crewmate": "クルー",
     "Impostor": "インポスター",
@@ -177,7 +172,7 @@ parent: {role_info.type_ja}
         f.write(content)
     print(f"Successfully created '{file_path}'")
 
-def main(role_name_en: str, resx_dir: str="../ExtremeRoles/Translation/resx", out_dir: str= "docs/追加役職"):
+def main(role_name_en: str, resx_dir: str=r"..\\ExtremeRoles\\ExtremeRoles\\Translation\\resx", out_dir: str= r"docs\\追加役職"):
     """Create a new role markdown file by looking up role info in .resx files."
 
     Args:
