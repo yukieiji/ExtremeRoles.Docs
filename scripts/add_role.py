@@ -150,7 +150,7 @@ def create_role_markdown(role_info: RoleInfo, base_dir: str = "docs/追加役職
     if all_option_rows:
         table_header = "| オプション名 | 詳細 |\n| ---- | ---- |"
         table_body = "\n".join(all_option_rows)
-        options_section = f"## オプション\n{table_header}\n{table_body}\n"
+        options_section = f"## オプション\n\n{table_header}\n{table_body}\n"
     else:
         options_section = "## オプション\n\n(オプションなし)\n"
 
