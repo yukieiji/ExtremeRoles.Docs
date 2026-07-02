@@ -236,3 +236,190 @@ nav_order: 1
     - サーバの内部名
   - `TransName` string 必須
     - サーバの内部名を翻訳する際に使用するStringNamesを文字列化したもの
+
+## Among Us のバニラオプションおよび役職オプションの一覧を取得
+
+ホストのみ実行可能です。
+
+- GET : `http://localhost:57700/au/option/`
+
+| ステータスコード | 説明 |
+| --- | --- |
+| 200 | 取得に成功 |
+| 400 | ロビー外など、取得できない状況 |
+
+- レスポンス (JSON 配列)
+  - 各要素:
+    - `TranslatedTitle` string : カテゴリ名
+    - `Options` オブジェクト配列 : オプションのリスト
+      - `TranslatedTitle` string : オプション名
+      - `TranslatedFormat` string : 単位などのフォーマット
+      - `Value` any : 現在の値。`ValueType` が `RoleBase` の場合は以下のオブジェクト
+        - `MaxCount` int : 最大出現数
+        - `Chance` int : 出現確率 (%)
+      - `Info` オブジェクト : オプション識別情報
+        - `ValueType` string : 値の型 (`Bool`, `Byte`, `Int`, `UInt`, `Float`, `RoleBase`)
+        - `OptionName` int : オプションの内部 ID
+      - `Range` any[]? : 選択可能な値の範囲。`ValueType` が `RoleBase` の場合は null
+
+### Among Us のバニラオプションを更新
+
+ホストのみ実行可能です。
+
+- PUT : `http://localhost:57700/au/option/`
+
+| ステータスコード | 説明 |
+| --- | --- |
+| 200 | 更新に成功 |
+| 400 | ホストではない、または不正なリクエスト |
+
+- パラメーター (Body JSON)
+  - `ValueType` string 必須 : 値の型 (`Bool`, `Byte`, `Int`, `UInt`, `Float`, `RoleBase`)
+  - `OptionName` int 必須 : オプションの内部 ID
+  - `NewValue` any 必須 : 新しい値。`RoleBase` の場合は `{"MaxCount": int, "Chance": int}` の形式。
+
+- レスポンス (JSON)
+  - `UpdatedCategory` オブジェクト? : 更新されたカテゴリの情報
+    - `Id` int : カテゴリ ID
+    - `Name` string : カテゴリ名
+    - `ColorCode` string? : カテゴリの色 (RGBA 16進数)
+    - `Options` オブジェクト配列 : オプションのリスト
+      - `Id` int : オプション ID
+      - `IsActive` bool : 現在有効か
+      - `TranslatedName` string : 翻訳されたオプション名
+      - `Selection` int : 現在の選択値（インデックス）
+      - `Format` string : フォーマット
+      - `RangeMeta` オブジェクト : 値の範囲に関するメタ情報
+        - `Type` string : 範囲の型
+        - `Values` any[] : 選択可能な値の配列
+      - `Childs` オブジェクト配列 : 子オプション（階層構造がある場合）
+        - `Id` int : オプション ID
+        - `IsActive` bool : 有効か
+        - `TranslatedName` string : 翻訳名
+        - `Selection` int : 選択インデックス
+        - `Format` string : フォーマット
+        - `RangeMeta` オブジェクト :
+          - `Type` string : 範囲の型
+          - `Values` any[] : 値の配列
+        - `Childs` オブジェクト配列 : さらに下位の子オプション
+  - `ChainUpdatedOption` オブジェクト配列 : 連動して更新されたオプションのリスト
+    - `Id` int : カテゴリ ID
+    - `Options` オブジェクト配列 : オプションのリスト
+      - `Id` int : オプション ID
+      - `IsActive` bool : 現在有効か
+      - `TranslatedName` string : 翻訳されたオプション名
+      - `Selection` int : 現在の選択値（インデックス）
+      - `Format` string : フォーマット
+      - `RangeMeta` オブジェクト : 値の範囲に関するメタ情報
+        - `Type` string : 範囲の型
+        - `Values` any[] : 選択可能な値の配列
+      - `Childs` オブジェクト配列 : 子オプション
+        - `Id` int : オプション ID
+        - `IsActive` bool : 有効か
+        - `TranslatedName` string : 翻訳名
+        - `Selection` int : 選択インデックス
+        - `Format` string : フォーマット
+        - `RangeMeta` オブジェクト :
+          - `Type` string : 範囲の型
+          - `Values` any[] : 値の配列
+        - `Childs` オブジェクト配列 : 下位の子オプション
+  - `ChainUpdateCategory` オブジェクト? : 連動して更新されたカテゴリの情報
+    - `Id` int : カテゴリ ID
+    - `Name` string : カテゴリ名
+    - `ColorCode` string? : カテゴリの色 (RGBA 16進数)
+    - `Options` オブジェクト配列 : オプションのリスト
+      - `Id` int : オプション ID
+      - `IsActive` bool : 現在有効か
+      - `TranslatedName` string : 翻訳されたオプション名
+      - `Selection` int : 現在の選択値（インデックス）
+      - `Format` string : フォーマット
+      - `RangeMeta` オブジェクト : 値の範囲に関するメタ情報
+        - `Type` string : 範囲の型
+        - `Values` any[] : 選択可能な値の配列
+      - `Childs` オブジェクト配列 : 子オプション
+        - `Id` int : オプション ID
+        - `IsActive` bool : 有効か
+        - `TranslatedName` string : 翻訳名
+        - `Selection` int : 選択インデックス
+        - `Format` string : フォーマット
+        - `RangeMeta` オブジェクト :
+          - `Type` string : 範囲の型
+          - `Values` any[] : 値の配列
+        - `Childs` オブジェクト配列 : 下位の子オプション
+
+### Web設定UIを開きます
+オプション設定用の Web UI (HTML) を返します。
+
+- GET : `http://localhost:57700/au/option/ui/`
+
+| ステータスコード | 説明 |
+| --- | --- |
+| 200 | 成功 |
+| 404 | リソースが見つからない |
+
+
+### 指定されたキーの翻訳文字列を取得
+
+- POST : `http://localhost:57700/au/translation/`
+
+| ステータスコード | 説明 |
+| --- | --- |
+| 200 | 成功 |
+| 400 | 不正なリクエスト |
+
+- パラメーター (Body JSON)
+  - `Key` any 必須 : 翻訳キー（バニラの StringNames 数値、またはカスタム翻訳文字列キー）
+  - `Param` any[]? : 埋め込みパラメータのリスト
+
+- レスポンス (JSON)
+  - `Key` any : リクエストされたキー（数値または文字列）
+  - `Param` any[] : 翻訳に使用されたパラメータの配列
+  - `Result` string : 翻訳・フォーマットされた結果の文字列
+
+### 複数の翻訳文字列を一括取得
+
+- POST : `http://localhost:57700/au/translation/batch/`
+
+| ステータスコード | 説明 |
+| --- | --- |
+| 200 | 成功 |
+| 400 | 不正なリクエスト |
+
+- パラメーター (Body JSON 配列)
+  - 各要素:
+    - `Key` any 必須 : 翻訳キー
+    - `Param` any[]? : 埋め込みパラメータのリスト
+
+- レスポンス (JSON 配列)
+  - 各要素:
+    - `Key` any : リクエストされたキー
+    - `Param` any[] : 翻訳に使用されたパラメータの配列
+    - `Result` string : 翻訳・フォーマットされた結果の文字列
+
+### オプションの単位（秒など）の翻訳一覧を一括取得
+
+- GET : `http://localhost:57700/au/translation/batch/optionunit/`
+
+| ステータスコード | 説明 |
+| --- | --- |
+| 200 | 成功 |
+
+- レスポンス (JSON 配列)
+  - 各要素:
+    - `Key` any : 単位の識別子（`Second`, `Multiplier` 等の文字列）
+    - `Param` any[] : パラメータ（通常は空）
+    - `Result` string : 翻訳された単位文字列（例: "秒"）
+
+### Extreme Roles で追加された全役職名の翻訳（色付き）を一括取得します。
+
+- GET : `http://localhost:57700/au/translation/batch/role/`
+
+| ステータスコード | 説明 |
+| --- | --- |
+| 200 | 成功 |
+
+- レスポンス (JSON 配列)
+  - 各要素:
+    - `Key` any : 役職の内部名（`Sheriff`, `Jester` 等の文字列）
+    - `Param` any[] : パラメータ（通常は空）
+    - `Result` string : 翻訳・色付けされた役職名（例: "<color=#FF0000>Sheriff</color>"）

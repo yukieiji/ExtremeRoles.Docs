@@ -2,7 +2,7 @@
 layout: default
 title: Extreme Skins  Creator Mode APIs
 parent: REST API
-nav_order: 2
+nav_order: 3
 ---
 
 # Extreme Skins  Creator Mode APIs
