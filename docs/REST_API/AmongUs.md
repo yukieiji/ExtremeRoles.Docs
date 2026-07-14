@@ -423,3 +423,19 @@ nav_order: 1
     - `Key` any : 役職の内部名（`Sheriff`, `Jester` 等の文字列）
     - `Param` any[] : パラメータ（通常は空）
     - `Result` string : 翻訳・色付けされた役職名（例: "<color=#FF0000>Sheriff</color>"）
+
+### 部屋の情報の取得
+
+- GET : `http://localhost:57700/au/lobby/`
+
+| ステータスコード | 説明 |
+| --- | --- |
+| 200 | 成功 |
+| 400 | 取得に失敗（ゲームの情報が取得できない場合） |
+
+- レスポンス (JSON)
+  - `Online` オブジェクト? : オンライン情報（ローカルゲームの場合は null）
+    - `MaxPlayerNum` int : 最大プレイヤー数
+    - `Code` string : 部屋コード
+    - `Server` string : サーバー名
+  - `CurrentPlayerNames` string[] : 現在入室しているプレイヤー名のリスト

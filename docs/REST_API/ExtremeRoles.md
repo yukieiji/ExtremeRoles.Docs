@@ -199,3 +199,28 @@ nav_order: 2
   - `Op` string 必須 : 操作内容 (`FilterNewAdd`, `FilterRoleAdd`, `FilterAssignNumIncrease`, `FilterAssignNumDecrease`, `FilterRoleDelete`, `FilterDelete`)
   - `FilterId` string 必須 : フィルタ ID (GUID)
   - `MapRoleId` int? : 役職 ID（役職の追加・削除時のみ必須）
+
+
+### 役職の割り当てシミュレーションを実行
+
+ホストのみ実行可能です。
+
+- POST : `http://localhost:57700/exr/role/simulate/`
+
+| ステータスコード | 説明 |
+| --- | --- |
+| 200 | 成功 |
+| 400 | リクエストの失敗（ホストではない、またはゲームが開始できる状態にない場合） |
+
+- パラメータ (JSON)
+  - `Cycle` int : 試行回数
+  - `Option` オブジェクト :
+    - `PlayerNum` int : プレイヤー数
+  - `MockPlayerNames` string[]? : ダミープレイヤー名のリスト（任意）、未指定の場合はランダム名
+
+- レスポンス (JSON 配列)
+  - 各要素:
+    - `CycleData` オブジェクト配列 : 1回ごとのアサイン結果
+      - `PlayerName` string : プレイヤー名
+      - `RoleName` string : 役職名
+      - `Team` string : 陣営名 (`Null`, `Neutral`, `Crewmate`, `Impostor`, `Liberal`、Nullはシオンのみ使用)
